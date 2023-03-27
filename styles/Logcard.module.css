@@ -1,0 +1,11 @@
+.logbookList {
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.logbook {
+  margin: 0px 10px;
+}
