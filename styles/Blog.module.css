@@ -1,0 +1,7 @@
+.blog{
+  display: flex;
+}
+
+.content{
+  margin: 10px 30px;
+}
