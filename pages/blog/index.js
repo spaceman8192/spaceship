@@ -1,22 +1,29 @@
-import Header from '@/components/Header';
-import SideMenu from '@/components/common/SideMenu';
+import SideMenu from "@/components/common/SideMenu";
+import Post from "@/components/common/Post";
+import { getPosts } from "@/script/utils";
+import { useState } from "react";
 
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
+import styles from "@/styles/Blog.module.css";
+const Blog = ({ posts }) => {
+  const [isInit, setIsInit] = useState(true);
+  const [postData, setPostData] = useState({});
+  const onClickSideMenu = (props) => {
+    setIsInit(false);
 
-import styles from '@/styles/Blog.module.css';
-const Blog = ({ source }) => {
+    setPostData(
+      posts.find((post) => {
+        return post.data.id === props.data.id;
+      })
+    );
+  };
   return (
     <div>
-      <Header />
       <div>
         <h1>Blog</h1>
         <div className={styles.blog}>
-          <SideMenu />
+          <SideMenu posts={posts} onClickPost={onClickSideMenu} />
           <div className="wrapper">
-            <div className={styles.content}>
-              <MDXRemote {...source} />
-            </div>
+            {isInit ? "init" : <Post postInfo={postData} />}
           </div>
         </div>
       </div>
@@ -24,18 +31,13 @@ const Blog = ({ source }) => {
   );
 };
 
-export async function getStaticProps() {
-  const source = `# My MDX page
-
-  This is a list in markdown:
-  
-
-  - One
-  - Two
-  - Three`;
-
-  const mdxSource = await serialize(source);
-  return { props: { source: mdxSource } };
-}
+export const getStaticProps = () => {
+  const posts = getPosts(1);
+  return {
+    props: {
+      posts,
+    },
+  };
+};
 
 export default Blog;

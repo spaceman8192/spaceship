@@ -4,19 +4,24 @@ import {
   MenuItem,
   SubMenu,
   useProSidebar,
-} from 'react-pro-sidebar';
+} from "react-pro-sidebar";
 
-import styles from '@/styles/Common.module.css';
+import styles from "@/styles/Common.module.css";
 
-const SideMenu = () => {
+const SideMenu = ({ posts, onClickPost }) => {
   const { collapseSidebar } = useProSidebar();
+
+  const onClickHandler = (post) => {
+    onClickPost(post);
+  };
+
   return (
     <Sidebar className={styles.sidebar} r>
       <Menu
         iconShape="square"
         menuItemStyles={{
           button: ({ level, active, disabled }) => {
-            if (level === 1) return { color: active ? '#999999' : '#222222' };
+            if (level === 1) return { color: active ? "#999999" : "#222222" };
           },
         }}
       >
@@ -33,6 +38,15 @@ const SideMenu = () => {
           <MenuItem className={styles.menuItem}>Component 1</MenuItem>
           <MenuItem className={styles.menuItem}>Component 2</MenuItem>
         </SubMenu>
+        {posts.map((post) => (
+          <MenuItem
+            key={post.slug}
+            className={styles.menuItem}
+            onClick={() => onClickHandler(post)}
+          >
+            {post.data.title}
+          </MenuItem>
+        ))}
       </Menu>
     </Sidebar>
   );
