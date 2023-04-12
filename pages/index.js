@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Header from "@/components/Header";
-import { getPosts } from "@/script/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,18 +20,9 @@ export default function Home({ posts }) {
       </Head>
       <div>
         <div>
-          <h1>Home</h1>
-          {posts.map((post) => (
-            <p key={post.slug}>{post.data.title}</p>
-          ))}
-        </div>
-      </div>
-      {/* <main className={styles.main}>
-        <Header />
-        <div>
           <h1>Main</h1>
         </div>
-      </main> */}
+      </div>
     </>
   );
 }

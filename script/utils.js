@@ -13,8 +13,6 @@ export const getPosts = (pageIndex) => {
     }
   );
 
-  console.log(dirFiles);
-
   const posts = dirFiles
     .map((file) => {
       if (!file.name.endsWith(".mdx")) return;

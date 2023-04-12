@@ -1,13 +1,10 @@
 import LogCard from "@/components/common/LogCard";
-import Header from "@/components/Header";
 import styles from "@/styles/Logcard.module.css";
 
 const Logbook = () => {
   return (
     <>
-      <Header />
       <div className={styles.logbook}>
-        <h1>Logbook</h1>
         <div className={styles.logbookList}>
           <LogCard logDate={Date(2023, 3, 27)}>
             <p>= Next.js Framework 구성</p>
